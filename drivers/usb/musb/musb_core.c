@@ -1064,7 +1064,10 @@ static void musb_shutdown(struct platform_device *pdev)
 	|| defined(CONFIG_USB_MUSB_AM35X_MODULE)	\
 	|| defined(CONFIG_USB_MUSB_DSPS)		\
 	|| defined(CONFIG_USB_MUSB_DSPS_MODULE)
-static ushort fifo_mode = 4;
+//changed by liu
+//static ushort fifo_mode = 4;
+static ushort fifo_mode = 2;
+
 #elif defined(CONFIG_USB_MUSB_UX500)			\
 	|| defined(CONFIG_USB_MUSB_UX500_MODULE)
 static ushort fifo_mode = 5;
@@ -1099,8 +1102,11 @@ static struct musb_fifo_cfg mode_1_cfg[] = {
 { .hw_ep_num = 4, .style = FIFO_RXTX, .maxpacket = 256, },
 };
 
+
+//******************************************changed by liu
+//****************************notice the difference from num3
 /* mode 2 - fits in 4KB */
-static struct musb_fifo_cfg mode_2_cfg[] = {
+/*static struct musb_fifo_cfg mode_2_cfg[] = {
 { .hw_ep_num = 1, .style = FIFO_TX,   .maxpacket = 512, },
 { .hw_ep_num = 1, .style = FIFO_RX,   .maxpacket = 512, },
 { .hw_ep_num = 2, .style = FIFO_TX,   .maxpacket = 512, },
@@ -1108,6 +1114,17 @@ static struct musb_fifo_cfg mode_2_cfg[] = {
 { .hw_ep_num = 3, .style = FIFO_RXTX, .maxpacket = 256, },
 { .hw_ep_num = 4, .style = FIFO_RXTX, .maxpacket = 256, },
 };
+*/
+static struct musb_fifo_cfg mode_2_cfg[] = {
+{ .hw_ep_num = 1, .style = FIFO_TX,   .maxpacket = 1024, },
+{ .hw_ep_num = 1, .style = FIFO_RX,   .maxpacket = 1024, },
+{ .hw_ep_num = 2, .style = FIFO_TX,   .maxpacket = 64, },
+{ .hw_ep_num = 2, .style = FIFO_RX,   .maxpacket = 64, },
+//{ .hw_ep_num = 3, .style = FIFO_RXTX, .maxpacket = 1024, },	//Origion
+{ .hw_ep_num = 3, .style = FIFO_TX, .maxpacket = 1024, },	//Lego defined
+{ .hw_ep_num = 4, .style = FIFO_RXTX, .maxpacket = 128, },
+};
+
 
 /* mode 3 - fits in 4KB */
 static struct musb_fifo_cfg mode_3_cfg[] = {
